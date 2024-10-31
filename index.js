@@ -2,7 +2,7 @@ const express = require('express')
 var bodyParser = require('body-parser')
 const pool = require('./db')
 const app = express()
-const port = 5002
+const port = 3000
 var jsonParser = bodyParser.json()
 
 app.get('/', (req, res) => {
