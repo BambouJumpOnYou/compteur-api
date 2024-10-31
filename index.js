@@ -1,8 +1,9 @@
 const express = require('express')
+require('dotenv').config()
 var bodyParser = require('body-parser')
 const pool = require('./db')
 const app = express()
-const port = 3000
+const port = process.env.PORT
 var jsonParser = bodyParser.json()
 
 app.get('/', (req, res) => {
