@@ -42,13 +42,22 @@ app.get('/compteur/:userId' , async (req, res) => {
   }
 })
 
-app.post('/user', jsonParser, function (req, res) {
+app.post('/user', jsonParser, async function (req, res) {
   if (!req.body) res.sendStatus(400)
 
   const userId = req.body
   console.log(userId)
+  try {
+    await pool.query(
+      'INSERT INTO compteur (compteur, userId) VALUES (?,?)',
+      [0, userId]
+    )
+      res.send({ message: 'Tout good' })
 
-  res.send({ message: 'Tout good' })
+  } catch (err) {
+    console.error('Erreur lors de linsertion des valeurs:', err)
+    res.status(500).send('Erreur du serveur')
+  }
 })
 
 app.put('/resetCompteur', jsonParser, async function(req, res) {
